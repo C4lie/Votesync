@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Results – {{ election.name }}</h2>
+<p>Total Votes: {{ total_votes }}</p>
+
+{% if total_votes == 0 %}
+<p class="text-muted">No votes yet.</p>
+{% else %}
+<ul class="list-group mt-3">
+  {% for candidate in candidates %}
+  <li class="list-group-item">
+    <strong>{{ candidate.name }}</strong> – {{ candidate.vote_count }} vote(s)
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<a
+  href="{% url 'auditor_dashboard' %}"
+  class="btn btn-secondary mt-4"
+  >Back</a
+>
+{% endblock %}

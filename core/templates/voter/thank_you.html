@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<h3>Thank You for Voting!</h3>
+<p>
+  You voted for <strong>{{ candidate.name }}</strong> in the election
+  <strong>{{ election.name }}</strong>.
+</p>
+<a
+  href="{% url 'voter_dashboard' %}"
+  class="btn btn-primary"
+  >Back to Dashboard</a
+>
+{% endblock %}

@@ -1,12 +1,35 @@
 {% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
-<h2>Create Candidate</h2>
-<form method="post">
-  {% csrf_token %} {{ form|crispy }}
-  <button
-    type="submit"
-    class="btn btn-success"
+
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-primary">👤 Add a New Candidate</h2>
+    <p class="text-muted">
+      Fill in the candidate's details and assign them to an election.
+    </p>
+  </div>
+
+  <div
+    class="card shadow-sm p-4 mx-auto"
+    style="max-width: 600px"
   >
-    Submit
-  </button>
-</form>
+    <form method="post">
+      {% csrf_token %} {{ form|crispy }}
+
+      <div class="d-flex justify-content-between mt-4">
+        <a
+          href="{% url 'admin_dashboard' %}"
+          class="btn btn-secondary"
+          >← Back to Admin Dashboard</a
+        >
+        <button
+          type="submit"
+          class="btn btn-success"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 {% endblock %}

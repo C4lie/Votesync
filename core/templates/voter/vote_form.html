@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<h3>Vote in: {{ election.name }}</h3>
+<p>{{ election.description }}</p>
+
+<form method="post">
+  {% csrf_token %} {{ form|crispy }}
+  <button
+    type="submit"
+    class="btn btn-success"
+  >
+    Submit Vote
+  </button>
+</form>
+{% endblock %}

@@ -1,5 +1,122 @@
-<!-- core/templates/home.html -->
 {% extends 'base.html' %} {% block content %}
-<h1 class="text-center text-primary">Welcome to VoteSync</h1>
-<p class="text-center">Secure Voting Platform for Colleges & Events</p>
+
+<!-- Hero Section -->
+<div class="bg-light py-5">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">
+      Welcome to <span class="text-primary">VoteSync</span> 🗳️
+    </h1>
+    <p class="lead text-muted mb-4">
+      An online election platform for Voters, Admins, and Public Auditors.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      {% comment %} {% if not user.is_authenticated %}
+      <a
+        href="{% url 'register' %}"
+        class="btn btn-primary px-4"
+        >Register</a
+      >
+      <a
+        href="{% url 'login' %}"
+        class="btn btn-outline-primary px-4"
+        >Login</a
+      >
+      {% endif %} {% endcomment %}
+      <a
+        href="{% url 'guest_dashboard' %}"
+        class="btn btn-dark px-4"
+        >View as Guest (Auditor)</a
+      >
+    </div>
+  </div>
+</div>
+
+<!-- About Section -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">About VoteSync</h2>
+  <p class="text-center text-muted mb-5">
+    VoteSync is a secure and easy-to-use election management system that
+    provides transparency, role-based access, and real-time result tracking for
+    digital democracy.
+  </p>
+  <div class="row g-4 text-center">
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">👥 Multi-Role Access</h5>
+          <p class="card-text">
+            Admins, Voters, and Public Auditors each get their own interface and
+            permissions.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">🛡️ Secure Voting</h5>
+          <p class="card-text">
+            Data encryption and one-time voting logic ensure fairness and
+            privacy.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">📊 Transparent Results</h5>
+          <p class="card-text">
+            Live results and graphs for both admins and public viewers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Why Choose VoteSync?</h2>
+    <p class="mb-5">
+      Built on democratic values with clean, secure, and scalable tech.
+    </p>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="p-3 bg-white text-dark rounded shadow-sm">✅ Verified</div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-white text-dark rounded shadow-sm">🛡️ Secure</div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-white text-dark rounded shadow-sm">
+          👥 Accessible
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-3 bg-white text-dark rounded shadow-sm">
+          👁️ Transparent
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">Contact Us</h2>
+  <div class="row text-center">
+    <div class="col-md-6 mb-3">
+      <h5>📧 Email</h5>
+      <a href="mailto:votesync@support.com">helloweenbatman@gmail.com</a>
+    </div>
+    <div class="col-md-6 mb-3">
+      <h5>📞 Phone</h5>
+      <a href="tel:+919876543210">+91 1714201714</a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

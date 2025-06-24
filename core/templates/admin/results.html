@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container py-4">
+  <h2 class="mb-4 text-primary">📊 Results: {{ election.name }}</h2>
+  <p class="lead">Total Votes: <strong>{{ total_votes }}</strong></p>
+
+  {% if total_votes == 0 %}
+  <div class="alert alert-warning">No votes have been cast yet.</div>
+  {% else %}
+  <div class="list-group">
+    {% for candidate in candidates %}
+    <div class="list-group-item">
+      <strong>{{ candidate.name }}</strong> – {{ candidate.vote_count }} vote(s)
+      <div class="progress mt-2">
+        <div
+          class="progress-bar bg-info"
+          role="progressbar"
+          style="width: {% widthratio candidate.vote_count total_votes 100 %}%"
+          aria-valuenow="{{ candidate.vote_count }}"
+          aria-valuemin="0"
+          aria-valuemax="{{ total_votes }}"
+        >
+          {{ candidate.vote_count }} ({{ candidate.vote_count|floatformat:0 }}
+          votes)
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Back Button based on role -->
+  <div class="mt-4">
+    <a
+      href="{% url 'election_list' %}"
+      class="btn btn-secondary"
+      >← Back to Dashboard</a
+    >
+  </div>
+</div>
+
+{% endblock %}

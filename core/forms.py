@@ -6,18 +6,13 @@ from .models import Election, Candidate
 from django.forms.widgets import DateTimeInput
 
 class ElectionForm(forms.ModelForm):
-    start_time = forms.DateTimeField(
-        widget=DateTimeInput(attrs={'type': 'datetime-local'}),
-        input_formats=['%Y-%m-%dT%H:%M']
-    )
-    end_time = forms.DateTimeField(
-        widget=DateTimeInput(attrs={'type': 'datetime-local'}),
-        input_formats=['%Y-%m-%dT%H:%M']
-    )
-
     class Meta:
         model = Election
-        fields = ['name', 'description', 'start_time', 'end_time', 'status']
+        fields = '__all__'
+        widgets = {
+            'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 class CandidateForm(forms.ModelForm):
     class Meta:
@@ -44,3 +39,11 @@ class RegisterForm(forms.ModelForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class VoteForm(forms.Form):
+    candidate = forms.ModelChoiceField(queryset=Candidate.objects.none(), widget=forms.RadioSelect)
+
+    def __init__(self, election, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['candidate'].queryset = Candidate.objects.filter(election=election)

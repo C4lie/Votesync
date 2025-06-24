@@ -9,7 +9,7 @@ class Election(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    status = models.BooleanField(default=False)  # True = Active
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     ROLE_CHOICES = (
         ('admin', 'Admin'),
         ('voter', 'Voter'),
-        ('auditor', 'Auditor'),
+        # ('auditor', 'Auditor'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -46,3 +46,16 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
+
+
+class Vote(models.Model):
+    voter = models.ForeignKey(User, on_delete=models.CASCADE)
+    election = models.ForeignKey(Election, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('voter', 'election')  
+
+    def __str__(self):
+        return f"{self.voter.username} → {self.candidate.name} in {self.election.name}"    

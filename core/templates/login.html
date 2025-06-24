@@ -1,12 +1,41 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button
-    type="submit"
-    class="btn btn-success"
+
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 70vh"
+>
+  <div
+    class="card shadow-sm p-4"
+    style="width: 100%; max-width: 400px"
   >
-    Login
-  </button>
-</form>
+    <div class="text-center mb-3">
+      <div
+        class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center"
+        style="width: 50px; height: 50px"
+      >
+        🗳️
+      </div>
+      <h4 class="mt-2 text-primary fw-bold">Login to VoteSync</h4>
+    </div>
+
+    <form method="post">
+      {% csrf_token %} {% for field in form %}
+      <div class="mb-3">
+        <label class="form-label">{{ field.label }}</label>
+        {{ field }} {% if field.errors %}
+        <div class="text-danger small">{{ field.errors|striptags }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <button
+        type="submit"
+        class="btn btn-success w-100"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
 {% endblock %}
